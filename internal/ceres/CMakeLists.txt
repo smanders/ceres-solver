@@ -200,6 +200,9 @@ add_library(ceres ${CERES_LIBRARY_SOURCE})
 set_target_properties(ceres PROPERTIES
   VERSION ${CERES_VERSION}
   SOVERSION ${CERES_VERSION_MAJOR})
+if(NOT BUILD_SHARED_LIBS AND DEFINED ver)
+  set_target_properties(ceres PROPERTIES OUTPUT_NAME ceres${ver})
+endif()
 
 include(AppendTargetProperty)
 # Always build position-independent code (PIC), even when building Ceres as a
