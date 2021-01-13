@@ -897,13 +897,17 @@ else ()
   endif ()
 endif ()
 
+if(DEFINED XP_NAMESPACE)
+  set(nameSpace NAMESPACE ${XP_NAMESPACE}::)
+endif()
+
 # This "exports" for installation all targets which have been put into the
 # export set "CeresExport". This generates a CeresTargets.cmake file which,
 # when read in by a client project as part of find_package(Ceres) creates
 # imported library targets for Ceres (with dependency relations) which can be
 # used in target_link_libraries() calls in the client project to use Ceres.
 install(EXPORT CeresExport
-        DESTINATION ${RELATIVE_CMAKECONFIG_INSTALL_DIR} FILE CeresTargets.cmake)
+        DESTINATION ${RELATIVE_CMAKECONFIG_INSTALL_DIR} ${nameSpace} FILE CeresTargets.cmake)
 
 # Save the relative path from the installed CeresConfig.cmake file to the
 # install prefix.  We do not save an absolute path in case the installed package

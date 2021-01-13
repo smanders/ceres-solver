@@ -215,6 +215,10 @@ set_target_properties(ceres PROPERTIES
   VERSION ${CERES_VERSION}
   SOVERSION ${CERES_VERSION_MAJOR})
 if(NOT BUILD_SHARED_LIBS AND DEFINED ver)
+  target_include_directories(ceres PUBLIC $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}>)
+  if (MINIGLOG)
+    target_include_directories(ceres PUBLIC $<INSTALL_INTERFACE:$<INSTALL_PREFIX>/include${verDir}/ceres/internal/miniglog>)
+  endif()
   set_target_properties(ceres PROPERTIES OUTPUT_NAME ceres${ver})
 endif()
 
